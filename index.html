@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f5f0">
+<title>北九州 11/1—11/7｜旅行行程</title>
+<style>
+:root{
+  --bg:#f6f4ef; --paper:#fffdf9; --ink:#353532; --muted:#88857d;
+  --line:#dedbd2; --accent:#b96559; --soft:#f1dfdb; --green:#718577;
+  --blue:#70879a; --shadow:0 8px 28px rgba(45,43,38,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","PingFang TC",
+  "Microsoft JhengHei",sans-serif;line-height:1.65;
+}
+.wrap{max-width:820px;margin:auto;padding:18px 16px 64px}
+.hero{
+  background:var(--paper);border:1px solid var(--line);border-radius:26px;
+  padding:30px 25px 27px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"";position:absolute;right:-42px;top:-52px;width:170px;height:170px;
+  border-radius:50%;background:var(--soft);opacity:.65;
+}
+.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--accent);font-weight:750}
+.hero h1{font-size:31px;line-height:1.2;margin:8px 0 5px;letter-spacing:.01em}
+.hero p{margin:0;color:var(--muted);font-size:14px}
+.daynav{
+  position:sticky;top:0;z-index:10;display:flex;gap:7px;overflow:auto;
+  padding:12px 1px;background:rgba(246,244,239,.94);backdrop-filter:blur(8px);
+}
+.daynav button{
+  border:1px solid var(--line);background:#fbfaf6;color:var(--muted);
+  border-radius:999px;padding:7px 12px;font:inherit;font-size:11px;
+  white-space:nowrap;cursor:pointer;
+}
+.daynav button.active{background:var(--ink);color:white;border-color:var(--ink)}
+.day{scroll-margin-top:65px;margin-top:18px}
+.day-header{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+  margin:28px 2px 13px;
+}
+.day-kicker{font-size:11px;letter-spacing:.15em;color:var(--accent);font-weight:750}
+.day-title{font-size:24px;font-weight:750;line-height:1.25;margin-top:2px}
+.day-route{font-size:12px;color:var(--muted);text-align:right}
+.section-title{
+  display:flex;align-items:center;gap:10px;margin:20px 0 10px;
+  font-size:11px;font-weight:750;letter-spacing:.14em;color:var(--muted);
+}
+.section-title:after{content:"";height:1px;background:var(--line);flex:1}
+.stay,.note,.branch,.missing{
+  background:var(--paper);border:1px solid var(--line);border-radius:18px;
+  padding:15px 17px;box-shadow:0 5px 18px rgba(45,43,38,.035);
+}
+.stay strong{font-size:15px}.stay small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.timeline{position:relative}
+.timeline:before{
+  content:"";position:absolute;left:55px;top:15px;bottom:20px;width:1px;background:var(--line)
+}
+.event{display:grid;grid-template-columns:78px 1fr;position:relative;margin-bottom:15px}
+.time{font-size:14px;font-weight:750;padding-top:17px}
+.dot{
+  position:absolute;left:50px;top:22px;width:11px;height:11px;
+  border-radius:50%;background:var(--paper);border:2px solid var(--accent);z-index:2;
+}
+.card{
+  background:var(--paper);border:1px solid var(--line);border-radius:17px;
+  padding:14px 15px;box-shadow:0 5px 18px rgba(45,43,38,.035)
+}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:9px}
+.card h3{margin:0;font-size:15px;line-height:1.4}
+.tag{
+  flex:none;font-size:10px;color:var(--accent);background:var(--soft);
+  border-radius:999px;padding:2px 7px
+}
+.detail{font-size:12px;color:#66645e;margin:7px 0 0;white-space:pre-line}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.pill{
+  border:1px solid var(--line);background:#faf9f5;border-radius:999px;
+  padding:2px 7px;color:var(--muted);font-size:10px
+}
+details{margin-top:9px}
+summary{cursor:pointer;color:var(--accent);font-size:11px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:before{content:"＋ "}
+details[open] summary:before{content:"－ "}
+.sub{font-size:11px;color:#6c6961;margin:7px 0 0;padding-left:16px}
+.sub li{margin:3px 0}
+.branch{margin:0 0 11px}
+.branch .branch-title{font-weight:750;font-size:13px;margin-bottom:6px}
+.branch p{font-size:11px;color:#66645e;margin:4px 0}
+.branch ul{font-size:11px;color:#66645e;margin:6px 0 0;padding-left:18px}
+.note{font-size:11px;color:#66645e}
+.note ul{margin:4px 0 0;padding-left:18px}
+.missing{text-align:center;padding:26px 18px;color:var(--muted)}
+.missing strong{display:block;color:var(--ink);margin-bottom:4px}
+.footer{text-align:center;color:#aaa69d;font-size:10px;margin-top:34px}
+.hidden{display:none}
+@media(max-width:540px){
+  .wrap{padding:10px 11px 48px}.hero{padding:25px 20px}
+  .hero h1{font-size:27px}.day-title{font-size:21px}
+  .timeline:before{left:47px}.event{grid-template-columns:67px 1fr}.dot{left:42px}
+  .day-route{display:none}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero">
+  <div class="eyebrow">KYUSHU TRIP · 11.01 — 11.07</div>
+  <h1>北九州旅行</h1>
+  <p>福岡・小倉・日田・由布院・別府・長崎・太宰府</p>
+</header>
+
+<nav class="daynav" id="daynav">
+  <button class="active" data-target="day1">DAY 1</button>
+  <button data-target="day2">DAY 2</button>
+  <button data-target="day3">DAY 3</button>
+  <button data-target="day4">DAY 4</button>
+  <button data-target="day5">DAY 5</button>
+  <button data-target="day6">DAY 6</button>
+  <button data-target="day7">DAY 7</button>
+</nav>
+
+<section class="day" id="day1">
+  <div class="day-header"><div><div class="day-kicker">DAY 01</div><div class="day-title">11/1（日）</div></div><div class="day-route">台北 → 福岡</div></div>
+  <div class="section-title">STAY</div>
+  <div class="stay"><strong>GRAND BASE Yakuin Odori</strong><small>格蘭德貝斯藥院大通｜福岡</small><small>1 Chome-10-19 Yakuin, Chuo Ward, Fukuoka, 810-0022 日本</small></div>
+  <div class="section-title">TIMELINE</div>
+  <div class="timeline">
+    <article class="event"><div class="time">16:00</div><i class="dot"></i><div class="card"><div class="card-head"><h3>下飛機</h3><span class="tag">ARRIVAL</span></div><p class="detail">A2 出口 → 接駁車至國內線航廈 → 地鐵空港線至博多 → 轉七隈線至藥院大通，約 45 分鐘。</p><div class="meta"><span class="pill">¥260</span><span class="pill">約 45 min</span></div></div></article>
+    <article class="event"><div class="time">17:00</div><i class="dot"></i><div class="card"><div class="card-head"><h3>飯店放行李</h3><span class="tag">HOTEL</span></div><p class="detail">藥院大通站步行約 6 分鐘。</p></div></article>
+    <article class="event"><div class="time">17:30</div><i class="dot"></i><div class="card"><div class="card-head"><h3>採購時間</h3><span class="tag">SHOPPING</span></div><p class="detail">LaLaport（24）／MINA 百貨（18）／藥院／Bic Camera-2 號館／大國-天神南店／唐吉訶德-天神本店</p><div class="meta"><span class="pill">Bic Camera 21:00</span><span class="pill">大國 22:45</span><span class="pill">唐吉訶德 24H</span></div></div></article>
+    <article class="event"><div class="time">20:30</div><i class="dot"></i><div class="card"><div class="card-head"><h3>晚餐｜藥院燒肉</h3><span class="tag">DINNER</span></div><p class="detail">距離飯店步行約 3 分鐘。</p></div></article>
+  </div>
+  <div class="section-title">NOTES</div><div class="note"><ul><li>飯店：soft bank → 福岡銀行 → 烏龍麵 → 馬路對面河野醫院巷子。</li><li>Bic Camera 21:00（2 號館比較大）。</li><li>7-11、Lawson、FamilyMart、兩家超市。</li><li>大國藥妝天神南店 22:45；唐吉訶德 24 小時。</li></ul></div>
+</section>
+
+<section class="day" id="day2">
+  <div class="day-header"><div><div class="day-kicker">DAY 02</div><div class="day-title">11/2（一）</div></div><div class="day-route">小倉城竹燈祭</div></div>
+  <div class="section-title">TIMELINE</div><div class="timeline">
+    <article class="event"><div class="time">09:00</div><i class="dot"></i><div class="card"><h3>小倉城</h3><p class="detail">藥院大通 → 博多站轉山陽新幹線 → 小倉站轉 JR 至西小倉 → 步行 3 分鐘。</p><div class="meta"><span class="pill">小倉城＋竹燈季 ¥1,000（KKday）</span><span class="pill">新幹線單程 ¥1,600（官網）</span></div></div></article>
+    <article class="event"><div class="time">10:00</div><i class="dot"></i><div class="card"><h3>魚町銀天街</h3><p class="detail">步行 8 分鐘｜松本清／大創／唐吉訶德／橡子之森</p></div></article>
+    <article class="event"><div class="time">11:30</div><i class="dot"></i><div class="card"><h3>午餐</h3><p class="detail">魚町銀天街美食推薦：狐狸屋燒烏龍麵、鐵鍋煎餃、奶油小蛋糕（車站旁點心）。</p></div></article>
+    <article class="event"><div class="time">13:30</div><i class="dot"></i><div class="card"><h3>SAINTcity 購物中心</h3><p class="detail">步行 7 分鐘｜UNIQLO、GU、Loft、無印良品、Seria 百元店。</p></div></article>
+    <article class="event"><div class="time">14:15</div><i class="dot"></i><div class="card"><h3>Aruaru City 動漫商場</h3><p class="detail">步行 10 分鐘。</p></div></article>
+    <article class="event"><div class="time">15:00</div><i class="dot"></i><div class="card"><h3>皿倉山夜景</h3><p class="detail">JR 小倉 → 八幡（15 分）→ 計程車（10 分）→ 纜車山麓站 → 纜車（7 分）＋斜坡車（3 分）。</p><div class="meta"><span class="pill">纜車來回套票 ¥1,230</span></div></div></article>
+    <article class="event"><div class="time">17:30</div><i class="dot"></i><div class="card"><h3>晚餐</h3><p class="detail">皿倉山餐廳用餐（約 NTD 200–400），或隨身備妥輕食果腹。</p></div></article>
+    <article class="event"><div class="time">19:00</div><i class="dot"></i><div class="card"><h3>小倉城竹燈祭</h3><p class="detail">開放時間 18:00–21:00，最後入場 20:30。</p></div></article>
+    <article class="event"><div class="time">21:30</div><i class="dot"></i><div class="card"><h3>宵夜</h3><p class="detail">超商／博多車站／ShinShin 拉麵（營業至 24:00）。</p></div></article>
+  </div>
+  <div class="section-title">NOTES</div><div class="note"><ul><li>皿倉山觀景台風大，體感約 0–5°C；準備防風外套、發熱衣、輕便羽絨衣、圍巾或毛帽。</li><li>若在小倉站午餐可吃資先生烏龍麵（AMU PLAZA 地下街）。</li><li>置物櫃：小倉站 3 樓剪票口外（大廳兩側），中／小型約 ¥300–500。</li></ul></div>
+</section>
+
+<section class="day" id="day3">
+  <div class="day-header"><div><div class="day-kicker">DAY 03</div><div class="day-title">11/3（二）</div></div><div class="day-route">福岡 → 日田</div></div>
+  <div class="section-title">STAY</div><div class="stay"><strong>東のおうち</strong><small>住宿｜日田</small></div>
+  <div class="section-title">MORNING</div><div class="timeline">
+    <article class="event"><div class="time">07:10</div><i class="dot"></i><div class="card"><h3>前往日田｜首選</h3><p class="detail">藥院大通 07:10 → 博多 07:19 → 特急 07:43 → 日田 09:08。</p></div></article>
+    <article class="event"><div class="time">08:12</div><i class="dot"></i><div class="card"><h3>前往日田｜備案</h3><p class="detail">藥院大通 08:12 → 博多 08:21 → 08:40 久留米 08:57 → 09:16 日田 10:19。</p></div></article>
+    <article class="event"><div class="time">上午</div><i class="dot"></i><div class="card"><h3>咸宜園跡＋豆田町散策</h3><p class="detail">咸宜園跡免費；豆田町商店街散策。</p><details><summary>推薦店家／小吃</summary><ul class="sub"><li>薫長酒造</li><li>発酵舎KOGURA（甘酒、梅酒、紅茶蛋糕）</li><li>日田醬油廠（醬油冰淇淋）</li><li>岩尾藥舖（古蹟，門票 ¥400）</li><li>粋（蛋糕捲、布丁）</li><li>寺子屋本舖（現烤仙貝）</li><li>ギャラクティカ豚足（烤豬腳）</li><li>旭饅頭（栗子饅頭）</li></ul></details></div></article>
+    <article class="event"><div class="time">午餐</div><i class="dot"></i><div class="card"><h3>二選一</h3><p class="detail">高價｜千屋鰻魚飯（11:00–16:00）<br>平價｜USI TO SAKANA（11:00–14:30，赤牛蓋飯、牛丼飯）</p></div></article>
+  </div>
+  <div class="section-title">AFTERNOON · WEATHER PLAN</div>
+  <div class="branch"><div class="branch-title">方案 A｜天氣好・九重夢大吊橋</div><p>13:39 日田 → 14:17 豐後中村 → 14:39 或 14:41 巴士 → 15:03 或 15:13 大吊橋中村口（¥500）。</p><p>回程：17:18 巴士 → 17:39 豐後中村 → 18:05 電車 → 18:48 日田。</p></div>
+  <div class="branch"><div class="branch-title">方案 B｜天氣不佳・豐後森機關庫</div><p>13:39 日田 → 14:04 豐後森。</p><p>景點：豐後森機關庫、鐵道博物館（10:00–16:00，可 DIY 紀念品）。</p><p>回程：16:59 → 17:30 或 18:18 → 18:48 返回日田。</p></div>
+  <div class="section-title">DINNER</div><div class="note"><strong>想夫戀炒麵 總本店</strong>｜11:00–21:30</div>
+</section>
+
+<section class="day" id="day4">
+  <div class="day-header"><div><div class="day-kicker">DAY 04</div><div class="day-title">11/4（三）</div></div><div class="day-route">日田 → 由布院 →（別府）→ 福岡</div></div>
+  <div class="section-title">STAY</div><div class="stay"><strong>GRAND BASE Yakuin Odori</strong><small>住宿｜福岡</small></div>
+  <div class="section-title">TIMELINE</div><div class="timeline">
+    <article class="event"><div class="time">09:09</div><i class="dot"></i><div class="card"><h3>日田 → 由布院</h3><p class="detail">09:09 日田 → 10:02 由布院。由布院遊客服務中心寄放行李 → 湯之坪街道、花卉村散策。</p></div></article>
+    <article class="event"><div class="time">10:30</div><i class="dot"></i><div class="card"><h3>午餐｜由布釜飯「心」</h3><p class="detail">營業 10:30–20:30。</p></div></article>
+    <article class="event"><div class="time">上午</div><i class="dot"></i><div class="card"><h3>由布院特色店家</h3><p class="detail">橡木之森、史努比 Chocolat、吉伊卡哇專賣店、貓頭鷹森林、花麴菊家、Milch、金賞豐後牛可樂餅、吉吾、Shiitakemonster、Telato、B-Speak。</p></div></article>
+  </div>
+  <div class="section-title">AFTERNOON · OPTIONS</div>
+  <div class="branch"><div class="branch-title">方案 1｜深度由布院漫步</div><ul><li>湯布院昭和館 09:00–17:00，門票 ¥1,400。</li><li>下午茶：茶房 天井棧敷。</li><li>由布院田園鄉間散步 → 車站領行李。</li><li>15:56 → 18:10／17:17 → 19:27（由布院之森，需預約）／19:27 → 21:34。</li></ul></div>
+  <div class="branch"><div class="branch-title">方案 2｜由布院提早結束 → 別府地獄</div><ul><li>14:05 → 14:56 或 14:45 → 15:36（龜之井 36 號巴士）。</li><li>2 號或 5 號巴士前往海地獄、鬼石坊主地獄；去程 15:05／15:25，回程 17:33／17:59。</li><li>晚餐：美乃里家庭餐廳 17:30–22:00。</li><li>別府 → 博多：18:52 → 20:50 或 19:19 → 21:29。</li></ul></div>
+</section>
+
+<section class="day" id="day5">
+  <div class="day-header"><div><div class="day-kicker">DAY 05</div><div class="day-title">11/5（四）</div></div><div class="day-route">福岡 ↔ 長崎</div></div>
+  <div class="section-title">STAY</div><div class="stay"><strong>GRAND BASE Yakuin Odori</strong><small>住宿｜福岡</small></div>
+  <div class="section-title">TIMELINE</div><div class="timeline">
+    <article class="event"><div class="time">07:41</div><i class="dot"></i><div class="card"><h3>前往長崎｜班次 1</h3><p class="detail">藥院大通 07:41 → 博多 07:51 → 武雄溫泉 09:20 → 新幹線 09:23 → 長崎 09:54。</p></div></article>
+    <article class="event"><div class="time">08:23</div><i class="dot"></i><div class="card"><h3>前往長崎｜班次 2</h3><p class="detail">藥院大通 08:23 → 博多 08:33 → 武雄溫泉 09:58 → 新幹線 10:01 → 長崎 10:32。</p></div></article>
+    <article class="event"><div class="time">上午</div><i class="dot"></i><div class="card"><h3>原爆資料館＋平和公園</h3><p class="detail">長崎站前搭藍 1 號或紅 2 號至原爆資料館站。原爆資料館 08:30–17:30，門票 ¥200。</p></div></article>
+    <article class="event"><div class="time">午餐</div><i class="dot"></i><div class="card"><h3>二選一</h3><p class="detail">文治郎炸豬排 11:30–14:30／なんばしよっと居酒屋 11:30–14:00。</p></div></article>
+    <article class="event"><div class="time">14:00</div><i class="dot"></i><div class="card"><h3>眼鏡橋</h3><p class="detail">藍 1 號至新地中華街 → 綠 5 號至眼鏡橋站。尋找心形石磚；ママン・ガトー現烤舒芙蕾 11:00–17:30。</p></div></article>
+    <article class="event"><div class="time">15:30</div><i class="dot"></i><div class="card"><h3>哥拉巴園</h3><p class="detail">綠 5 號至石橋站 → Glover Sky Road 斜行電梯。哥拉巴園 08:00–20:00，門票 ¥1,300；另有大浦天主堂、鍋冠山展望台。</p></div></article>
+    <article class="event"><div class="time">17:00</div><i class="dot"></i><div class="card"><h3>出島碼頭</h3><p class="detail">綠 5 號至新地中華街 → 藍 1 號至出島站 → 漫步至碼頭。</p></div></article>
+    <article class="event"><div class="time">晚餐</div><i class="dot"></i><div class="card"><h3>二選一</h3><p class="detail">四海樓強棒拉麵／中華料理，或海鮮市場 長崎港海鮮丼。</p></div></article>
+    <article class="event"><div class="time">18:30</div><i class="dot"></i><div class="card"><h3>伴手禮｜長崎街道かもめ市場</h3><p class="detail">藍 1 號至長崎車站前。採購長崎蛋糕：福砂屋、松翁軒、文明堂、和泉屋。</p></div></article>
+    <article class="event"><div class="time">19:22</div><i class="dot"></i><div class="card"><h3>回程｜班次 1</h3><p class="detail">長崎 19:22 → 武雄溫泉 19:52 → 博多 20:55 → 藥院大通 21:25。</p></div></article>
+    <article class="event"><div class="time">19:48</div><i class="dot"></i><div class="card"><h3>回程｜班次 2</h3><p class="detail">長崎 19:48 → 武雄溫泉 20:16 → 博多 21:15 → 藥院大通 21:49。</p></div></article>
+  </div>
+</section>
+
+<section class="day" id="day6">
+  <div class="day-header"><div><div class="day-kicker">DAY 06</div><div class="day-title">11/6（五）</div></div><div class="day-route">菊花展／七五三節</div></div>
+  <div class="section-title">STAY</div><div class="stay"><strong>GRAND BASE Yakuin Odori</strong><small>住宿｜福岡</small></div>
+  <div class="section-title">TIMELINE</div><div class="timeline">
+    <article class="event"><div class="time">07:30</div><i class="dot"></i><div class="card"><h3>飯店出發</h3><p class="detail">步行 9 分鐘至西鐵藥院站 → 二日市站轉乘太宰府線，約 35 分鐘。</p><div class="meta"><span class="pill">¥580</span></div></div></article>
+    <article class="event"><div class="time">08:15</div><i class="dot"></i><div class="card"><h3>太宰府天滿宮</h3><p class="detail">先參觀天滿宮，隨後漫步老街參道。</p></div></article>
+    <article class="event"><div class="time">11:00</div><i class="dot"></i><div class="card"><h3>老街美饌（早午餐）</h3><p class="detail">推薦：一蘭合格拉麵、FUKUYA 明太子泡飯、神樂（KAGURA）明太子料理、筑紫庵漢堡、海鮮丼竜宮城、草莓大福天山本店、抹茶冰淇淋。</p><div class="meta"><span class="pill">¥1,000–2,000</span></div></div></article>
+    <article class="event"><div class="time">13:30</div><i class="dot"></i><div class="card"><h3>竈門神社</h3><p class="detail">太宰府站（福岡銀行前站牌）搭公車至內山站，或轉乘計程車，約 10 分鐘。</p><div class="meta"><span class="pill">¥100／¥1,000</span></div></div></article>
+    <article class="event"><div class="time">15:30</div><i class="dot"></i><div class="card"><h3>FUK COFFEE</h3><p class="detail">太宰府站搭西鐵巴士直達博多後步行 11 分鐘（約 51 分鐘），或原路電車轉乘（約 32 分鐘）。</p><div class="meta"><span class="pill">¥800／¥630</span></div></div></article>
+    <article class="event"><div class="time">16:45</div><i class="dot"></i><div class="card"><h3>THE FULL FULL</h3><p class="detail">由咖啡廳步行 3 分鐘即達明太子麵包名店。</p><div class="meta"><span class="pill">¥500</span></div></div></article>
+    <article class="event"><div class="time">17:30</div><i class="dot"></i><div class="card"><h3>博多運河城</h3><p class="detail">步行 3 分鐘抵達，逛街採買。</p></div></article>
+    <article class="event"><div class="time">19:00</div><i class="dot"></i><div class="card"><h3>晚餐</h3><p class="detail">天婦羅 Takao（運河城 4F）或中洲屋台小吃（步行約 7 分鐘）。</p><div class="meta"><span class="pill">¥1,500–2,500</span></div></div></article>
+    <article class="event"><div class="time">20:30</div><i class="dot"></i><div class="card"><h3>LOPIA 超市</h3><p class="detail">博多車站筑紫口步行 3 分鐘。僅限現金支付、無免稅服務，營業至 21:00。</p></div></article>
+  </div>
+</section>
+
+<section class="day" id="day7">
+  <div class="day-header"><div><div class="day-kicker">DAY 07</div><div class="day-title">11/7（日）</div></div><div class="day-route">福岡 → 台北</div></div>
+  <div class="section-title">ITINERARY</div>
+  <div class="missing"><strong>行程資料尚未提供</strong>原 PDF 第 17 頁只有「Day 7｜11/7（日）福岡 → 台北」標題，沒有後續行程內容。</div>
+</section>
+
+<div class="footer">本頁依「北九州旅遊行程規劃 11/1–11/7」PDF 內容整理；未補入 PDF 未提供的 Day 7 行程。</div>
+</main>
+<script>
+const buttons=[...document.querySelectorAll('.daynav button')];
+const days=[...document.querySelectorAll('.day')];
+buttons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      buttons.forEach(b=>b.classList.toggle('active',b.dataset.target===entry.target.id));
+    }
+  });
+},{rootMargin:'-35% 0px -55% 0px',threshold:0});
+days.forEach(day=>observer.observe(day));
+</script>
+</body>
+</html>
